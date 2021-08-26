@@ -173,7 +173,10 @@ class _Login extends State<Login> with InputValidationMixin {
                       padding:
                       EdgeInsets.symmetric(vertical: 19, horizontal: 140),
                       onPressed: () {
-                         _login();
+                        if(_formKey.currentState!.validate())
+                          {
+                            _login();
+                          }
                       },
                       child: Text(
                         "Đăng Nhập",

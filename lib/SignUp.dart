@@ -159,10 +159,10 @@ class _SignUp extends State<SignUp> with InputValidationMixin {
                         decoration: create("Nhập Lại Mật khẩu"),
                         obscureText: true,
                         validator: (value) {
-                          if (isPasswordValid(value!))
+                          if (isrePasswordValid(value!,passListening.text))
                             return null;
                           else
-                            return 'Enter a valid password';
+                            return 'Enter a valid repassword';
                         },
                       )),
                   Container(
@@ -173,7 +173,10 @@ class _SignUp extends State<SignUp> with InputValidationMixin {
                       padding:
                           EdgeInsets.symmetric(vertical: 19, horizontal: 125),
                       onPressed: () {
-                        _register();
+                        if(_formKey.currentState!.validate())
+                          {
+                            _register();
+                          }
                       },
                       child: Text(
                         "Tạo tài khoản mới ",
@@ -192,6 +195,7 @@ class _SignUp extends State<SignUp> with InputValidationMixin {
 }
 mixin InputValidationMixin {
   bool isPasswordValid(String password) => password.length > 6;
+  bool isrePasswordValid(String password,String repassword) => password.length > 6 &&password==repassword;
   bool isEmailValid(String email) {
     RegExp regex = new RegExp(
         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+");
